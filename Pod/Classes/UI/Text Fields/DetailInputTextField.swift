@@ -20,6 +20,7 @@ open class DetailInputTextField: StylizedTextField, TextFieldValidation, AutoCom
     open func textFieldDidBeginEditing(_ textField: UITextField) {
         if (textField.text ?? "").isEmpty {
             textField.text = UITextField.emptyTextFieldCharacter
+            textField.sendActions(for: .editingChanged)
         }
     }
     
@@ -29,6 +30,7 @@ open class DetailInputTextField: StylizedTextField, TextFieldValidation, AutoCom
         let deletingLastCharacter = !(textField.text ?? "").isEmpty && textField.text != UITextField.emptyTextFieldCharacter && newText.isEmpty
         if deletingLastCharacter {
             textField.text = UITextField.emptyTextFieldCharacter
+            textField.sendActions(for: .editingChanged)
             cardInfoTextFieldDelegate?.textField(self, didEnterPartiallyValidInfo: newText)
             return false
         }
@@ -39,6 +41,7 @@ open class DetailInputTextField: StylizedTextField, TextFieldValidation, AutoCom
         
         if isInputValid(currentTextFieldText, partiallyValid: true) {
             textField.text = currentTextFieldText
+            textField.sendActions(for: .editingChanged)
             if isInputValid(currentTextFieldText, partiallyValid: false) {
                 cardInfoTextFieldDelegate?.textField(self, didEnterValidInfo: currentTextFieldText)
             } else {

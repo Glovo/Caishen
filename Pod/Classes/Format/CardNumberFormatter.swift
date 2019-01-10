@@ -178,8 +178,9 @@ public final class CardNumberFormatter {
             
             position = textField.position(from: textField.beginningOfDocument, offset: newCursorPositionFormatted)
         }
-        
+      
         textField.text = newValue
+        textField.sendActions(for: .editingChanged)
         if let position = position {
             textField.selectedTextRange = textField.textRange(from: position, to: position)
         }
