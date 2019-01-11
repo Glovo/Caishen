@@ -16,7 +16,9 @@ public struct ChinaUnionPay: CardType {
     public let name = "China UnionPay"
     
     public let CVCLength = 3
-    
+  
+    public let lengths = [16, 17, 18, 19]
+  
     public let identifyingDigits = Set([62])
     
     public init() {

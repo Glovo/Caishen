@@ -49,6 +49,8 @@ public protocol CardType {
      - returns: A set of numbers which, when being found in the first digits of the card number, indicate the card issuer.
      */
     var identifyingDigits: Set<Int> { get }
+  
+    var lengths: [Int] { get }
 
     /**
      Validates the card verification code.
@@ -123,8 +125,8 @@ extension CardType {
         return [4, 4, 4, 4]
     }
 
-    public var maxLength: Int {
-        return numberGrouping.reduce(0) { $0 + $1 }
+    public var lengths: [Int] {
+        return [numberGrouping.reduce(0) { $0 + $1 }]
     }
 
     public func validate(cvc: CVC) -> CardValidationResult {
@@ -169,15 +171,6 @@ extension CardType {
         } else {
             return CardValidationResult.Valid
         }
-    }
-
-    /**
-     You can implicitly set this property by providing `numberGrouping` when implementing this protocol.
-     
-     - returns: The number of digits that are contained in a card number of card type `self`.
-     */
-    public func expectedCardNumberLength() -> Int {
-        return numberGrouping.reduce(0, {$0 + $1})
     }
 
     /**
@@ -247,10 +240,11 @@ extension CardType {
      
      - returns: CardValidationResult.Valid if the lengths match, CardValidationResult.NumberDoesNotMatchType otherwise.
      */
-    private func testLength(_ actualLength: Int, assumingLength expectedLength: Int) -> CardValidationResult {
-        if actualLength == expectedLength {
+    private func testLength(_ actualLength: Int, assumingLengths expectedLengths: [Int]) -> CardValidationResult {
+       let maxLength = expectedLengths.max() ?? 0
+        if expectedLengths.contains(actualLength) {
             return .Valid
-        } else if actualLength < expectedLength {
+        } else if actualLength < maxLength {
             return .NumberIncomplete
         } else if actualLength > maxLength {
             return .NumberTooLong
@@ -270,7 +264,7 @@ extension CardType {
         - `.NumberDoesNotMatchType`:    The card number's Issuer Identification Number does not match `self`
      */
     public func lengthMatchesType(_ length: Int) -> CardValidationResult {
-        return testLength(length, assumingLength: expectedCardNumberLength())
+        return testLength(length, assumingLengths: self.lengths)
     }
 
     /**
