@@ -121,7 +121,8 @@ open class NumberInputTextField: StylizedTextField {
             notifyNumberInvalidity()
         }
 
-        let newLengthComplete = cardTypeRegister.cardType(for: parsedCardNumber).lengthMatchesType(parsedCardNumber.length) == .Valid
+        let newLengthComplete =
+            parsedCardNumber.length == cardTypeRegister.cardType(for: parsedCardNumber).maxLength
 
         if newLengthComplete && newValidation != .Valid {
             addNumberInvalidityObserver()
