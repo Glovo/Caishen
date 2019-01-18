@@ -31,7 +31,7 @@ open class DetailInputTextField: StylizedTextField, TextFieldValidation, AutoCom
         if deletingLastCharacter {
             textField.text = UITextField.emptyTextFieldCharacter
             textField.sendActions(for: .editingChanged)
-            cardInfoTextFieldDelegate?.textField(self, didEnterPartiallyValidInfo: newText)
+            cardInfoTextFieldDelegate?.textField?(self, didEnterPartiallyValidInfo: newText)
             return false
         }
         
@@ -45,12 +45,12 @@ open class DetailInputTextField: StylizedTextField, TextFieldValidation, AutoCom
             if isInputValid(currentTextFieldText, partiallyValid: false) {
                 cardInfoTextFieldDelegate?.textField(self, didEnterValidInfo: currentTextFieldText)
             } else {
-                cardInfoTextFieldDelegate?.textField(self, didEnterPartiallyValidInfo: currentTextFieldText)
+                cardInfoTextFieldDelegate?.textField?(self, didEnterPartiallyValidInfo: currentTextFieldText)
             }
         }
         
         if !overflowTextFieldText.isEmpty {
-            cardInfoTextFieldDelegate?.textField(self, didEnterOverflowInfo: overflowTextFieldText)
+            cardInfoTextFieldDelegate?.textField?(self, didEnterOverflowInfo: overflowTextFieldText)
         }
         
         return false
@@ -62,7 +62,7 @@ open class DetailInputTextField: StylizedTextField, TextFieldValidation, AutoCom
             cardInfoTextFieldDelegate?.textField(self, didEnterValidInfo: text)
         } else if isInputValid(text, partiallyValid: true) {
             self.text = text
-            cardInfoTextFieldDelegate?.textField(self, didEnterPartiallyValidInfo: text)
+            cardInfoTextFieldDelegate?.textField?(self, didEnterPartiallyValidInfo: text)
         }
     }
 
