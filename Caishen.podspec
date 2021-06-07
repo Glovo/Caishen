@@ -30,5 +30,8 @@ Pod::Spec.new do |s|
   s.swift_version = '4.2'
 
   s.source_files = 'Pod/Classes/**/*'
-  s.resources = ['Pod/Assets/*', 'Pod/Resources/*']
+  s.resource_bundles = {
+    'Caishen' => ['Pod/Assets/*', 'Pod/Resources/*']
+  }
+
 end
