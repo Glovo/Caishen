@@ -17,7 +17,7 @@ public struct AmericanExpress: CardType {
     
     public let CVCLength = 4
 
-    public let numberGrouping = [4, 6, 5]
+    public let numberGroupings = [[4, 6, 5]]
 
     public let identifyingDigits = Set([34, 37])
 

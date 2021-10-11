@@ -52,7 +52,7 @@ public final class CardNumberFormatter {
 
         let cardType = cardTypeRegister.cardType(for: Number(rawValue: cardNumber))
         do {
-            let groups = cardType.numberGrouping
+            let groups = cardType.numberGrouping(for: cardNumber.count)
             var pattern = ""
             var first = true
             for group in groups {

@@ -177,5 +177,15 @@ class CardNumberValidatorTests: XCTestCase {
             XCTAssertLuhnTestFailed(Visa().validate(number: Number(rawValue: $0)))
         })
     }
-    
+
+    func testMultipleGroupingsCardValid() {
+        let validNumber = "6799990100000000019"
+        XCTAssertValid(MultipleGroupingsCardType().validate(number: Number(rawValue: validNumber)))
+    }
+
+    func testMultipleGroupingsCardInvalid() {
+        let validNumber = "67999901000000000191"
+        XCTAssertInvalidNumberForType(MultipleGroupingsCardType().validate(number: Number(rawValue: validNumber)))
+    }
+
 }

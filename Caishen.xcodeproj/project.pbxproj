@@ -54,6 +54,7 @@
 		2FDD158B1CC7B30C0086CEAC /* CardExpiryValidatorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FDD158A1CC7B30C0086CEAC /* CardExpiryValidatorTests.swift */; };
 		2FDD158D1CC7B3200086CEAC /* CardNumberValidatorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FDD158C1CC7B3200086CEAC /* CardNumberValidatorTests.swift */; };
 		2FDD158F1CC7B32D0086CEAC /* CardNumberFormatterTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FDD158E1CC7B32D0086CEAC /* CardNumberFormatterTests.swift */; };
+		7852405D2714FDB90012093D /* MultipleGroupingsCardType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7852405C2714FDB90012093D /* MultipleGroupingsCardType.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -119,6 +120,7 @@
 		2FDD158A1CC7B30C0086CEAC /* CardExpiryValidatorTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CardExpiryValidatorTests.swift; sourceTree = "<group>"; };
 		2FDD158C1CC7B3200086CEAC /* CardNumberValidatorTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CardNumberValidatorTests.swift; sourceTree = "<group>"; };
 		2FDD158E1CC7B32D0086CEAC /* CardNumberFormatterTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CardNumberFormatterTests.swift; sourceTree = "<group>"; };
+		7852405C2714FDB90012093D /* MultipleGroupingsCardType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MultipleGroupingsCardType.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -179,6 +181,7 @@
 				2FDD158E1CC7B32D0086CEAC /* CardNumberFormatterTests.swift */,
 				2FDD151F1CC7B0B90086CEAC /* CaishenTests.swift */,
 				2FDD15211CC7B0B90086CEAC /* Info.plist */,
+				7852405C2714FDB90012093D /* MultipleGroupingsCardType.swift */,
 			);
 			path = CaishenTests;
 			sourceTree = "<group>";
@@ -462,6 +465,7 @@
 			files = (
 				2FDD15871CC7B2F00086CEAC /* XCTAssertValidation.swift in Sources */,
 				2FDD158B1CC7B30C0086CEAC /* CardExpiryValidatorTests.swift in Sources */,
+				7852405D2714FDB90012093D /* MultipleGroupingsCardType.swift in Sources */,
 				2FDD15891CC7B2FD0086CEAC /* CardCVCValidatorTests.swift in Sources */,
 				2FDD158F1CC7B32D0086CEAC /* CardNumberFormatterTests.swift in Sources */,
 				2FDD158D1CC7B3200086CEAC /* CardNumberValidatorTests.swift in Sources */,

@@ -8,6 +8,10 @@
 
 import Foundation
 
+private enum Constants {
+    static let defaultGrouping = [4, 4, 4, 4]
+}
+
 /**
  A `CardType` is a predefined type for different bank cards. Examples include "Visa" or "American Express", each of which have slightly different formats for their payment card information. Card types are determined by the Issuer Identification Number (IIN) of a card number, which is equal to the first six digits of a card number.
  */
@@ -29,7 +33,7 @@ public protocol CardType {
      0000-0000-0000-0000.
      - returns: The grouping of digits in the card number.
      */
-    var numberGrouping: [Int] { get }
+    var numberGroupings: [[Int]] { get }
     
     /**
      Card types are typically identified by their first n digits. In compliance to ISO/IEC 7812, the first digit is the *Major industry identifier*, which is equal to:
@@ -119,12 +123,32 @@ extension CardType {
         return true
     }
 
-    public var numberGrouping: [Int] {
-        return [4, 4, 4, 4]
+    public var numberGroupings: [[Int]] {
+        return [Constants.defaultGrouping]
     }
 
     public var maxLength: Int {
-        return numberGrouping.reduce(0) { $0 + $1 }
+        return numberGroupings
+            .map { $0.reduce(0, +) }
+            .max() ?? 0
+    }
+
+    public func numberGrouping(for length: Int) -> [Int] {
+//        guard length <= maxLength else {
+//            return Constants.defaultGrouping
+//        }
+        let closestGroupingIndex = self.numberGroupings
+            .map { $0.reduce(0, +) }
+            .map { abs($0 - maxLength) }
+            .enumerated()
+            .min { $0.element < $1.element }?
+            .offset
+
+        guard let closestGroupingIndex = closestGroupingIndex else {
+            return Constants.defaultGrouping
+        }
+
+        return self.numberGroupings[closestGroupingIndex]
     }
 
     public func validate(cvc: CVC) -> CardValidationResult {
@@ -176,8 +200,10 @@ extension CardType {
      
      - returns: The number of digits that are contained in a card number of card type `self`.
      */
-    public func expectedCardNumberLength() -> Int {
-        return numberGrouping.reduce(0, {$0 + $1})
+    public func expectedCardNumberLengths() -> [Int] {
+        return numberGroupings.map { grouping in
+            grouping.reduce(0) { $0 + $1 }
+        }
     }
 
     /**
@@ -247,10 +273,10 @@ extension CardType {
      
      - returns: CardValidationResult.Valid if the lengths match, CardValidationResult.NumberDoesNotMatchType otherwise.
      */
-    private func testLength(_ actualLength: Int, assumingLength expectedLength: Int) -> CardValidationResult {
-        if actualLength == expectedLength {
+    private func testLength(_ actualLength: Int, assumingLengths expectedLengths: [Int]) -> CardValidationResult {
+        if expectedLengths.contains(actualLength) {
             return .Valid
-        } else if actualLength < expectedLength {
+        } else if actualLength < expectedLengths.min() ?? 0 {
             return .NumberIncomplete
         } else if actualLength > maxLength {
             return .NumberTooLong
@@ -270,7 +296,7 @@ extension CardType {
         - `.NumberDoesNotMatchType`:    The card number's Issuer Identification Number does not match `self`
      */
     public func lengthMatchesType(_ length: Int) -> CardValidationResult {
-        return testLength(length, assumingLength: expectedCardNumberLength())
+        return testLength(length, assumingLengths: expectedCardNumberLengths())
     }
 
     /**

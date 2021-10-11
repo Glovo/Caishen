@@ -17,7 +17,7 @@ public struct DinersClub: CardType {
     
     public let CVCLength = 3
 
-    public let numberGrouping = [4, 6, 4]
+    public let numberGroupings = [[4, 6, 4]]
     
     public let identifyingDigits = Set(300...305).union( Set([36, 38, 39, 309, 2014, 2149]) )
 
