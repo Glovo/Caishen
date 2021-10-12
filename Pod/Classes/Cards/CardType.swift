@@ -134,11 +134,7 @@ extension CardType {
     }
 
     public func numberGrouping(for length: Int) -> [Int] {
-//        guard length <= maxLength else {
-//            return Constants.defaultGrouping
-//        }
-        let closestGroupingIndex = self.numberGroupings
-            .map { $0.reduce(0, +) }
+        let closestGroupingIndex = self.expectedCardNumberLengths()
             .map { abs($0 - maxLength) }
             .enumerated()
             .min { $0.element < $1.element }?
@@ -201,7 +197,7 @@ extension CardType {
      - returns: The number of digits that are contained in a card number of card type `self`.
      */
     public func expectedCardNumberLengths() -> [Int] {
-        return numberGroupings.map { grouping in
+        return self.numberGroupings.map { grouping in
             grouping.reduce(0) { $0 + $1 }
         }
     }
