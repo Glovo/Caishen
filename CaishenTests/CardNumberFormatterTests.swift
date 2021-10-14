@@ -16,8 +16,9 @@ class CardNumberFormatterTests: XCTestCase {
     
     override func setUp() {
         super.setUp()
-        
-        formatter = CardNumberFormatter(cardTypeRegister: CardTypeRegister.sharedCardTypeRegister, separator: separator)
+
+        let cardTypeRegister = CardTypeRegister(registeredCardTypes:  CardTypeRegister.defaultCardTypes + [MultipleGroupingsCardType()])
+        formatter = CardNumberFormatter(cardTypeRegister: cardTypeRegister, separator: separator)
         // Put setup code here. This method is called before the invocation of each test method in the class.
     }
     
@@ -32,6 +33,19 @@ class CardNumberFormatterTests: XCTestCase {
         let formattedTestNumber = self.formatter.format(cardNumber: testNumber.description)
         
         XCTAssertEqual(formattedTestNumber, "4123-1234-1234-1234")
+    }
+
+    func testCorrectSeparatorMultipleGroupings() {
+        let expectedMappings = [
+            "6799990100000000": "6799-9901-0000-0000",
+            "67999901000000000": "6799-9901-0000-0000-0",
+            "679999010000000001": "6799-9901-0000-0000-01",
+            "6799990100000000019": "6799-9901-0000-0000-019"
+        ]
+
+        expectedMappings.forEach {
+            XCTAssertEqual($0.value, self.formatter.format(cardNumber: $0.key))
+        }
     }
     
     func testPerformanceExample() {
