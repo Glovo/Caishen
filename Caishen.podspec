@@ -8,7 +8,7 @@
 
 Pod::Spec.new do |s|
   s.name             = "Caishen"
-  s.version          = "2.2"
+  s.version          = "2.3.0"
   s.summary          = "A Payment Card UI & Validator for iOS"
 
 # This description is used to generate tags and improve search results.
@@ -23,7 +23,7 @@ Pod::Spec.new do |s|
   s.homepage         = "https://github.com/prolificinteractive/caishen.git"
   s.license          = 'MIT'
   s.author           = { "Daniel Vancura" => "daniel@prolificinteractive.com" }
-  s.source           = { :git => "https://github.com/prolificinteractive/caishen.git", :tag => s.version.to_s }
+  s.source           = { :git => "https://github.com/Glovo/caishen.git", :tag => s.version.to_s }
 
   s.platform     = :ios, '8.0'
   s.requires_arc = true
