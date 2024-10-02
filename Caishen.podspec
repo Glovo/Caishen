@@ -8,7 +8,7 @@
 
 Pod::Spec.new do |s|
   s.name             = "Caishen"
-  s.version          = "2.3.0"
+  s.version          = "2.4.0"
   s.summary          = "A Payment Card UI & Validator for iOS"
 
 # This description is used to generate tags and improve search results.
@@ -25,9 +25,9 @@ Pod::Spec.new do |s|
   s.author           = { "Daniel Vancura" => "daniel@prolificinteractive.com" }
   s.source           = { :git => "https://github.com/Glovo/caishen.git", :tag => s.version.to_s }
 
-  s.platform     = :ios, '8.0'
+  s.platform     = :ios, '15.0'
   s.requires_arc = true
-  s.swift_version = '4.2'
+  s.swift_version = '5.1'
 
   s.source_files = 'Pod/Classes/**/*'
   s.resources = ['Pod/Assets/*', 'Pod/Resources/*']
