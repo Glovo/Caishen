@@ -1,14 +1,14 @@
 <div align="center">
 
-# 📚 Caishen
+# Caishen
 
 **iOS payment card text field with on-device card number, expiry and CVC validation**
 
 Caishen is a Swift UI library, shipped as a CocoaPod, that puts the card number, expiry month and year, and CVC into one text field. It detects the card type from the first digits and validates the input on the device. It is **not** a payment gateway: it never contacts a card issuer, so a valid result only means the input is well-formed. This repo is Glovo's fork of [prolificinteractive/Caishen](https://github.com/prolificinteractive/Caishen).
 
-[![Swift](https://img.shields.io/badge/Swift-5.1-F05138?logo=swift&logoColor=white)](Caishen.podspec)
+[![Swift](https://img.shields.io/badge/Swift-F05138?logo=swift&logoColor=white)](Caishen.podspec)
 [![iOS](https://img.shields.io/badge/iOS-15.0%2B-000000?logo=apple&logoColor=white)](Caishen.podspec)
-[![CocoaPods](https://img.shields.io/badge/CocoaPods-2.4.0-EE3322?logo=cocoapods&logoColor=white)](Caishen.podspec)
+[![CocoaPods](https://img.shields.io/badge/CocoaPods-EE3322?logo=cocoapods&logoColor=white)](Caishen.podspec)
 <br/>
 [![License](https://img.shields.io/badge/license-MIT-blue)](LICENSE)
 
@@ -438,7 +438,7 @@ bundle exec pod lib lint --allow-warnings                               # podspe
 
 ```text
 .
-├── Pod/                          ⭐ library source shipped by the podspec
+├── Pod/                          source of truth: library source shipped by the podspec
 │   ├── Classes/                  Swift sources
 │   │   ├── Cards/                Card, CardType, CardTypeRegister, Number, Expiry, CVC
 │   │   │   └── Default Card Types/   built-in card types
